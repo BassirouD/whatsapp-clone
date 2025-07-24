@@ -1,7 +1,7 @@
 package com.koula.whatsappclone.security;
 
-import jakarta.validation.constraints.NotNull;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 
 public class KeycloakJwtAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken> {
     @Override
-    public AbstractAuthenticationToken convert(@NotNull Jwt source) {
+    public AbstractAuthenticationToken convert(@NonNull Jwt source) {
         return new JwtAuthenticationToken(source,
                 Stream.concat(new JwtGrantedAuthoritiesConverter().convert(source).stream(),
                         extractResourceRoles(source).stream()
